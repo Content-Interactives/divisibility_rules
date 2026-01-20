@@ -19,7 +19,7 @@ This interactive is currently featured in the following locations:
   - 👉 PRODUCTION: [https://ck12.co/3ztCH](https://ck12.co/3ztCH) 
   - 👉 MASTER: [https://test.ck12.co/g6ZWED](https://test.ck12.co/g6ZWED)
 - 📘 **CK-12 Flexbooks**  
-  - 👉 [PENDING: Book/lesson link where this interactive appears]
+  - 👉 5.2 Divisibility Rules to Find Factors: [https://flexbooks.ck12.org/cbook/ck-12-middle-school-math-concepts-grade-6/section/5.2/primary/lesson/divisibility-rules-to-find-factors-msm6/](https://flexbooks.ck12.org/cbook/ck-12-middle-school-math-concepts-grade-6/section/5.2/primary/lesson/divisibility-rules-to-find-factors-msm6/)
 
 ---
 
