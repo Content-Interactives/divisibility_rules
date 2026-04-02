@@ -1,42 +1,62 @@
-# Divisibility Rules Interactive
+# Divisibility Rules
 
-This repository contains the code for the **Divisibility Rules Interactive**, designed to help students explore and understand various rules for divisibility (e.g., by 2, 3, 5, 9) through engaging visuals and instant feedback.
+This repository holds a **production build** of a **Create React App** (CRA) single-page app: bundled JavaScript mounts on `#root`, with all asset URLs rooted at **`/divisibility_rules/`** for GitHub Pages.
 
----
+**Live site:** [https://content-interactives.github.io/divisibility_rules](https://content-interactives.github.io/divisibility_rules)
 
-## ​ Live Interactive
-
-Try it out here:  
-👉 [https://content-interactives.github.io/divisibility_rules](https://content-interactives.github.io/divisibility_rules)
+CK-12 links, Flexbooks, and standards: [Standards.md](Standards.md).
 
 ---
 
-## ​ Where This Interactive Is Being Used
+## What is in this repo
 
-This interactive is currently featured in the following locations:
+| Path | Purpose |
+|------|---------|
+| `index.html` | CRA shell: loads hashed `main.*.js` and `main.*.css` under `/divisibility_rules/static/...` |
+| `asset-manifest.json` | Maps logical entry names to hashed filenames |
+| `static/js/main.*.js` | Application bundle (minified React app) |
+| `static/js/488.*.chunk.js` | Async chunk (**web-vitals** reporting only) |
+| `static/css/main.*.css` | Main stylesheet |
+| `*.map` | Source maps for the bundles |
+| `manifest.json`, `favicon.ico`, `robots.txt` | CRA / PWA metadata |
 
-- <img width="20" height="20" alt="image" src="https://github.com/user-attachments/assets/5d12571f-8e12-4441-98ab-c0bc94069a96" /> **CK-12 Intent Response**  
-  - 👉 PRODUCTION: [https://ck12.co/3ztCH](https://ck12.co/3ztCH) 
-  - 👉 MASTER: [https://test.ck12.co/g6ZWED](https://test.ck12.co/g6ZWED)
-- 📘 **CK-12 Flexbooks**  
-  - 👉 5.2 Divisibility Rules to Find Factors: [https://flexbooks.ck12.org/cbook/ck-12-middle-school-math-concepts-grade-6/section/5.2/primary/lesson/divisibility-rules-to-find-factors-msm6/](https://flexbooks.ck12.org/cbook/ck-12-middle-school-math-concepts-grade-6/section/5.2/primary/lesson/divisibility-rules-to-find-factors-msm6/)
-
----
-
-## ​ Standards & Subjects
-
-This interactive aligns with the following topics and standards:
-
-- **📂 Subject Area**: Elementary / Middle School Math (Grade 5–6)  
-- **🧮 Topic**: Divisibility Rules — Exploring rules for determining if numbers are divisible by common divisors  
-- **📏 Common Core**:  
-  - **CCSS.MATH.CONTENT.5.NBT.B.7** – Add, subtract, multiply, and divide decimals to hundredths, using concrete models or drawings and strategies based on place value, properties of operations, and/or the relationship between addition and subtraction; relate the strategy to a written method and explain the reasoning used.  
-  - **CCSS.MATH.CONTENT.6.NS.B.4** – Find the greatest common factor (GCF) of two whole numbers less than or equal to 100 and the least common multiple (LCM) of two whole numbers less than or equal to 12. Use the distributive property to express a sum of two whole numbers with a common factor as a multiple of a sum with no common factor.
+There is **no** `package.json`, `src/`, or other **source** tree in this checkout—only deployable output. Rebuilding or editing behavior requires the original CRA project (or recovering sources from the source maps, which is fragile).
 
 ---
 
-## ​​ Developer Notes
+## Stack (inferred)
 
-- **Built with**: Static HTML, CSS, JavaScript
-- **Deployed via**: GitHub Pages  
-- **See** `index.html`, `asset-manifest.json`, and related assets in the repository root and `static/` folder  
+- **React** (CRA webpack bundle; `react` / `react-dom` embedded in `main.*.js`)
+- **Tailwind-style utility classes** appear in the shipped CSS class names (exact Tailwind version not pinned in-repo)
+- **web-vitals** (lazy-loaded chunk `488`)
+
+---
+
+## Hosting and URL paths
+
+`index.html` references scripts and links with **absolute** paths such as:
+
+`/divisibility_rules/static/js/main.27afc985.js`
+
+So the site expects to be served with **path prefix** `/divisibility_rules` (as on `*.github.io/divisibility_rules/`). Serving the folder at domain root without that prefix will **404** those assets.
+
+Local checks:
+
+- Use a static server and either mirror that path structure or temporarily rewrite paths if testing from another base.
+
+The `package-lock.json` at the root only records **`serve`** as a dependency (likely for local preview); run **`npm ci`** only if you intend to use that tooling—there is no accompanying `package.json` in the listing, so lockfile may be partially orphaned.
+
+---
+
+## Embedding
+
+- Full-height shell: `<body class="h-screen">`, `<div id="root" class="h-full">`.
+- Iframe `src` should point at the **deployed** Pages URL so `/divisibility_rules/...` resolves correctly.
+
+---
+
+## Maintenance
+
+- **Content / logic changes:** edit the **source** app elsewhere, run `npm run build`, then replace `static/`, `index.html`, `asset-manifest.json`, and related root files with the new CRA `build/` output (keeping `homepage` / `PUBLIC_URL` aligned with `/divisibility_rules`).
+- After any manual deploy to Jekyll-style hosts, ensure **`_next`-style paths are not stripped**; CRA uses `static/` (no leading underscore). If GitHub Pages runs Jekyll on the branch, a **`.nojekyll`** file in the published root may still be required depending on hosting setup.
+- **Fingerprinted filenames** change on every build; always ship updated `index.html` + `asset-manifest.json` together with new `static/` files.
